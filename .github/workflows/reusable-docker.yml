@@ -44,10 +44,10 @@ jobs:
           username: ${{ secrets.docker_username }}
           password: ${{ secrets.docker_token }}
 
-      - name: Build and push image
+      - name: Build and push docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./node-mongo-app
           push: true
           tags: |
             ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ inputs.tag }}
