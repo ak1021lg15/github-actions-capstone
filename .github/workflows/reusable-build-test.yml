@@ -40,6 +40,29 @@ jobs:
         run: npm install
         working-directory: ./node-mongo-app
 
+
+      - name: Start application
+        run: npm start > app.log 2>&1 &
+        working-directory: ./node-mongo-app
+        env:
+          MONGO_URI: mongodb://localhost:27017/day36db
+
+      - name: Wait for application
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:3000/ > /dev/null; then
+              echo "Application is running!"
+              exit 0
+            fi
+
+            echo "Waiting for application..."
+            sleep 2
+          done
+
+          echo "Application failed to start"
+          cat app.log
+          exit 1
+          
       - name: Run tests
         if: ${{ inputs.run_tests }}
         id: run-tests
