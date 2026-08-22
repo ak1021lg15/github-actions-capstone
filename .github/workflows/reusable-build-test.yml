@@ -38,11 +38,13 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./node-mongo-app
 
       - name: Run tests
         if: ${{ inputs.run_tests }}
         id: run-tests
         run: npm test
+        working-directory: ./node-mongo-app
 
       - name: Set test result
         id: test-result
