@@ -37,8 +37,8 @@ jobs:
     uses: ./.github/workflows/reusable-docker.yml
     with:
       image_name: ashish3185/node-mongo-app
-      tag: latest
-    #   tag: sha-${{ needs.generate-sha.outputs.short_sha }}
+    #   tag: latest
+      tag: sha-${{ needs.generate-sha.outputs.short_sha }}
     secrets:
       docker_username: ${{ secrets.docker_username }}
       docker_token: ${{ secrets.docker_token }}
