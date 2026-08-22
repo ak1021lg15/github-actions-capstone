@@ -50,8 +50,11 @@ jobs:
           context: ./node-mongo-app
           push: true
           tags: |
-            ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ inputs.tag }}
-            ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:latest
+            ${{ inputs.image_name }}:${{ inputs.tag }}
+            ${{ inputs.image_name }}:latest
+          # tags: |
+          #   ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ inputs.tag }}
+          #   ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:latest
 
 
       - name: Set image_url output
