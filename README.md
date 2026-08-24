@@ -1,1 +1,3 @@
 This github action capstone repo is project.
+
+[![Main Branch Pipeline](https://github.com/ak1021lg15/github-actions-capstone/actions/workflows/main-pipeline.yml/badge.svg)](https://github.com/ak1021lg15/github-actions-capstone/actions/workflows/main-pipeline.yml) [![PR Pipeline](https://github.com/ak1021lg15/github-actions-capstone/actions/workflows/pr-pipeline.yml/badge.svg)](https://github.com/ak1021lg15/github-actions-capstone/actions/workflows/pr-pipeline.yml) [![Scheduled Health Check](https://github.com/ak1021lg15/github-actions-capstone/actions/workflows/health-check.yml/badge.svg)](https://github.com/ak1021lg15/github-actions-capstone/actions/workflows/health-check.yml)
