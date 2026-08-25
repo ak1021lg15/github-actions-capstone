@@ -7,17 +7,21 @@ on:
         description: 'Docker image name'
         type: string
         required: true
+        
       tag:
         description: 'Image tag'
         type: string
         required: true
+
     secrets:
       docker_username:
         description: 'Docker Hub username'
         required: true
+
       docker_token:
         description: 'Docker Hub access token'
         required: true
+
     outputs:
       image_url:
         description: 'Full image path with tag'
@@ -44,11 +48,12 @@ jobs:
           username: ${{ secrets.docker_username }}
           password: ${{ secrets.docker_token }}
 
-      - name: Build and push docker image
+      - name: Build docker image
         uses: docker/build-push-action@v5
         with:
           context: ./node-mongo-app
-          push: true
+          push: false
+          load: true
           tags: |
             ${{ inputs.image_name }}:${{ inputs.tag }}
             ${{ inputs.image_name }}:latest
@@ -56,6 +61,18 @@ jobs:
           #   ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ inputs.tag }}
           #   ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:latest
 
+      - name: Scan Docker Image for Vulnerabilities
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: '${{ inputs.image_name }}:latest'
+          format: 'table'
+          exit-code: '1'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Push Docker Image
+        run: |
+          docker push ${{ inputs.image_name }}:${{ inputs.tag }}
+          docker push ${{ inputs.image_name }}:latest
 
       - name: Set image_url output
         id: set-image-url
