@@ -1,16 +1,16 @@
 # Stage 1 - Install Dependencies
-FROM node:22-alpine AS builder
+FROM node:22.23.2-alpine AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install --omit=dev
+RUN npm ci --omit=dev
 
 COPY . .
 
 # Stage 2 - Production Image
-FROM node:22-alpine
+FROM node:22.23.2-alpine
 
 WORKDIR /app
 
