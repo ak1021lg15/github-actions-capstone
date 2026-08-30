@@ -54,9 +54,12 @@ jobs:
           context: ./node-mongo-app
           push: false
           load: true
+          no-cache: true      # <-- Ye fresh layer bane
           tags: |
             ${{ inputs.image_name }}:${{ inputs.tag }}
             ${{ inputs.image_name }}:latest
+
+
           # tags: |
           #   ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:${{ inputs.tag }}
           #   ${{ vars.DOCKER_USERNAME }}/${{ inputs.image_name }}:latest
