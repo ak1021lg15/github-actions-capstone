@@ -3,6 +3,9 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
+# Global npm aur tar ko patch karein
+RUN npm install -g npm@latest
+
 COPY package*.json ./
 
 RUN npm install --omit=dev
@@ -13,6 +16,8 @@ COPY . .
 FROM node:22-alpine
 
 WORKDIR /app
+
+RUN npm install -g npm@latest
 
 RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
